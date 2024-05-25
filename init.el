@@ -58,6 +58,11 @@
 	 ;; kill ring)
 	 ("M-p" . 'helm-show-kill-ring))))
 
+(use-package flycheck
+  :ensure t
+  :hook
+  (prog-mode-hook . flycheck-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; completion
 (use-package company
@@ -127,4 +132,10 @@
   ("C-M-j" . elpy-nav-move-line-or-region-down)
   ("M-k" . elpy-nav-backward-block)
   ("M-j" . elpy-nav-forward-block))
+
+
+(use-package py-isort
+  :ensure t
+  :hook
+  (before-save . py-isort-before-save))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
