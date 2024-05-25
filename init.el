@@ -93,11 +93,11 @@
 		 (add-hook 'before-save-hook 'delete-trailing-whitespace nil t)))
   :bind
   ("C-c e" . elpy-execute)
-  ("S-M-l" . elpy-nav-indent-shift-right)
-  ("S-M-h" . elpy-nav-indent-shift-left)
-  ;; ("M-k" . elpy-nav-move-line-or-region-up)
-  ;; ("M-j" . elpy-nav-move-line-or-region-down)
+  ("C-M-l" . elpy-nav-indent-shift-right)
+  ("C-M-h" . elpy-nav-indent-shift-left)
+  ("C-M-k" . elpy-nav-move-line-or-region-up)
+  ("C-M-j" . elpy-nav-move-line-or-region-down)
   
-  ("S-M-k" . elpy-nav-backward-block)
-  ("S-M-j" . elpy-nav-forward-block))
+  ("M-k" . elpy-nav-backward-block)
+  ("M-j" . elpy-nav-forward-block))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
