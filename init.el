@@ -10,14 +10,21 @@
   (add-to-list 'load-path (expand-file-name "./init.el"))
   (require 'use-package))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; general settings
+
 ;; output generated code to separate file
 (setq custom-file (expand-file-name "./.generated.el"))
+
+;; load theme
+(load-theme 'wombat t)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; global keybindings
 (define-key global-map (kbd "M-c") 'completion-at-point)
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; use-package 
 (use-package evil
   :ensure t
@@ -138,4 +145,8 @@
   :ensure t
   :hook
   (before-save . py-isort-before-save))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; lsp
+
+
