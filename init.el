@@ -137,8 +137,8 @@
   ("C-M-h" . elpy-nav-indent-shift-left)
   ("C-M-k" . elpy-nav-move-line-or-region-up)
   ("C-M-j" . elpy-nav-move-line-or-region-down)
-  ("M-k" . elpy-nav-backward-block)
-  ("M-j" . elpy-nav-forward-block))
+  ("C-k" . elpy-nav-backward-block)
+  ("C-j" . elpy-nav-forward-block))
 
 
 (use-package py-isort
@@ -149,4 +149,34 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; lsp
 
+;; requires: pip install 'python-lsp-server[all]'
+(use-package lsp-mode
+  :ensure t
+  :hook
+  (python-mode . lsp-deferred)
+  :config
+  (setq lsp-pylsp-configuration-sources ["pylsp-mypy"])
+  (lsp-register-custom-settings
+   '(("pylsp.plugins.flake8.enabled" t t)
+     ("pylsp.plugins.autopep8.enabled" t t)
+     ("pylsp.plugins.black.enabled" t t)
+     ("pylsp-plugins.isort.enabled" t t)
+     ("pylsp.plugins.rope-autoimport.enabled" t t))))
 
+(use-package lsp-ui
+  :ensure t
+  :config (setq lsp-ui-sideline-enable t
+		lsp-ui-sideline-show-hover t
+		lsp-ui-sideline-delay 0.3
+		lsp-ui-sideline-ignore-duplicate t
+		;; lsp-ui-sideline-diagnostics-max-lines 79
+		lsp-ui-sideline-diagnostic-max-lines 5
+		lsp-ui-sideline-show-code-actions t
+		
+		lsp-ui-doc-enable t
+		lsp-ui-doc-delay 0.3
+		lsp-ui-doc-position 'right
+		lsp-ui-doc-alignment 'frame
+		lsp-ui-doc-header nil
+		lsp-ui-doc-include-signature t
+		lsp-ui-doc-use-childframe t))
