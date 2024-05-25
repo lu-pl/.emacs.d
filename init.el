@@ -28,6 +28,13 @@
   (define-key evil-emacs-state-map (kbd "<escape>") 'evil-normal-state)
   (setq evil-emacs-state-cursor '(bar . 1)))
 
+(use-package linum-relative
+  :ensure t
+  :init
+  (display-line-numbers-mode)
+  (linum-relative-global-mode)
+  (setq linum-relative-current-symbol ""))
+
 (use-package helm
   :ensure t
   :config
@@ -51,6 +58,8 @@
 	 ;; kill ring)
 	 ("M-p" . 'helm-show-kill-ring))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; completion
 (use-package company
   :ensure t
   :hook
@@ -62,6 +71,25 @@
 	company-selection-wrap-around t
 	company-dabbrev-downcase nil))
 
+(use-package company-quickhelp
+  :ensure t
+  :hook
+  (python-mode . company-quickhelp-mode)
+  (nxml-mode . company-quickhelp-mode)
+  (lisp-mode . company-quickhelp-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; parenthesis <3
+
+(use-package smartparens
+  :ensure t
+  :hook
+  (prog-mode . smartparens-global-mode)
+  ((lisp-mode
+    lisp-interaction-mode
+    emacs-lisp-mode) . (lambda ()
+    (progn (sp-pair "'" nil :actions :rem)
+	   (sp-pair "`" nil :actions :rem)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; python
@@ -97,7 +125,6 @@
   ("C-M-h" . elpy-nav-indent-shift-left)
   ("C-M-k" . elpy-nav-move-line-or-region-up)
   ("C-M-j" . elpy-nav-move-line-or-region-down)
-  
   ("M-k" . elpy-nav-backward-block)
   ("M-j" . elpy-nav-forward-block))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
